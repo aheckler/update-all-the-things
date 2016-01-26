@@ -20,11 +20,11 @@ brew cask cleanup &>> $log_file
 
 echo "==> Atom Package Manager"
 echo "    Updating packages"
-apm update --no-confirm &>> $log_file
+apm update --no-confirm --no-color &>> $log_file
 echo "==> Atom Package Manager"
 echo "    Cleaning up"
-apm clean &>> $log_file
-apm dedupe &>> $log_file
+apm clean --no-color &>> $log_file
+apm dedupe --no-color &>> $log_file
 
 echo "==> Node Package Manager"
 echo "    Updating global packages"
