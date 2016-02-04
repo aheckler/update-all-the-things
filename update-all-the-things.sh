@@ -25,7 +25,6 @@ echo
 echo "==> Atom Package Manager"
 echo "    Updating packages"
 apm update --no-confirm --no-color &>> $log_file
-echo "==> Atom Package Manager"
 echo "    Cleaning up"
 apm clean --no-color &>> $log_file
 apm dedupe --no-color &>> $log_file
