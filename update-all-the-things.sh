@@ -40,4 +40,11 @@ echo "    Updating client"
 composer self-update &>> $log_file
 echo
 
+echo "==> RubyGems"
+echo "    Updating gems"
+gem update &>> $log_file
+echo "    Cleaning up"
+gem cleanup &>> $log_file
+echo
+
 exit 0
