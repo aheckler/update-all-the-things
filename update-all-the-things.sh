@@ -7,11 +7,6 @@ log_file=~/Desktop/update-log-$date.txt
 echo "Starting updates..."
 echo
 
-echo "==> OS X"
-echo "    Updating applications"
-sudo softwareupdate -i -a &>> $log_file
-echo
-
 echo "==> Homebrew"
 echo "    Updating client"
 brew update &>> $log_file
