@@ -37,8 +37,10 @@ echo  &>> $log_file
 echo "==> Composer"  &>> $log_file
 echo "    Updating client"  &>> $log_file
 /usr/local/bin/composer self-update &>> $log_file
+echo "    Updating global packages"  &>> $log_file
+/usr/local/bin/composer global update &>> $log_file
 echo  &>> $log_file
 
 /usr/local/bin/subl $log_file
 
-exit 0
+exit 0;
