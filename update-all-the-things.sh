@@ -41,6 +41,8 @@ echo "    Updating global packages"  &>> $log_file
 /usr/local/bin/composer global update &>> $log_file
 echo  &>> $log_file
 
+echo "ALL DONE!"  &>> $log_file
+
 /usr/local/bin/subl $log_file
 
 exit 0;
