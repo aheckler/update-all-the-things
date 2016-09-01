@@ -58,6 +58,6 @@ echo &>> $log_file
 
 echo "ALL DONE!" &>> $log_file
 
-/usr/local/bin/subl $log_file
+/usr/bin/open -t $log_file
 
 exit 0;
