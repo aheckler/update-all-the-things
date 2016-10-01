@@ -47,13 +47,13 @@ echo &>> $log_file
 
 echo "==> Ruby Gems" &>> $log_file
 echo "    Updating sources" &>> $log_file
-/usr/local/bin/gem sources --update &>> $log_file
+/usr/bin/gem sources --update &>> $log_file
 echo "    Updating system" &>> $log_file
-/usr/local/bin/gem update --system &>> $log_file
+/usr/bin/gem update --system &>> $log_file
 echo "    Updating gems" &>> $log_file
-/usr/local/bin/gem update &>> $log_file
+/usr/bin/gem update &>> $log_file
 echo "    Cleaning up" &>> $log_file
-/usr/local/bin/gem cleanup --quiet &>> $log_file
+/usr/bin/gem cleanup --quiet &>> $log_file
 echo &>> $log_file
 
 echo "ALL DONE!" &>> $log_file
