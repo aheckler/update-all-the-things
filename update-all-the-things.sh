@@ -10,7 +10,7 @@ echo "==> Homebrew" &>> $log_file
 echo "    Updating client" &>> $log_file
 /usr/local/bin/brew update &>> $log_file
 echo "    Updating packages" &>> $log_file
-/usr/local/bin/brew upgrade --all &>> $log_file
+/usr/local/bin/brew upgrade &>> $log_file
 echo "    Cleaning up" &>> $log_file
 /usr/local/bin/brew prune &>> $log_file
 /usr/local/bin/brew cleanup --force &>> $log_file
