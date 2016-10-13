@@ -1,4 +1,8 @@
 #!/bin/bash
+#
+# Update local package managers.
+#
+# https://github.com/aheckler/update-all-the-things
 
 date=$(date +"%Y%m%d-%H%M%S")
 log_file=/Users/Adam/Desktop/update-log-$date.txt
