@@ -8,8 +8,10 @@
 #  CREATE LOG  #
 ################
 
-date=$(date +"%Y%m%d-%H%M%S")
-log_file=/Users/Adam/Desktop/update-log-$date.txt
+current_user=$(whoami)
+current_date=$(date +"%Y%m%d-%H%M%S")
+
+log_file=/Users/$current_user/Desktop/update-log-$date.txt
 
 echo "Starting updates..." 1>> $log_file
 echo 1>> $log_file
