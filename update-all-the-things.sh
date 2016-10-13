@@ -4,11 +4,16 @@
 #
 # https://github.com/aheckler/update-all-the-things
 
+# Create a log file
 date=$(date +"%Y%m%d-%H%M%S")
 log_file=/Users/Adam/Desktop/update-log-$date.txt
 
 echo "Starting updates..." &>> $log_file
 echo &>> $log_file
+
+##############
+#  HOMEBREW  #
+##############
 
 echo "==> Homebrew" &>> $log_file
 echo "    Updating client" &>> $log_file
@@ -24,10 +29,18 @@ echo &>> $log_file
 # https://github.com/Homebrew/legacy-homebrew/issues/31760
 mkdir /usr/local/etc/my.cnf.d &>> $log_file
 
+###################
+#  HOMEBREW CASK  #
+###################
+
 echo "==> Homebrew Cask" &>> $log_file
 echo "    Cleaning up" &>> $log_file
 brew cask cleanup &>> $log_file
 echo &>> $log_file
+
+##########
+#  ATOM  #
+##########
 
 echo "==> Atom Package Manager" &>> $log_file
 echo "    Updating packages" &>> $log_file
@@ -37,10 +50,18 @@ apm clean --no-color &>> $log_file
 apm dedupe --no-color &>> $log_file
 echo &>> $log_file
 
+#########
+#  NPM  #
+#########
+
 echo "==> Node Package Manager" &>> $log_file
 echo "    Updating global packages" &>> $log_file
 npm -g update &>> $log_file
 echo &>> $log_file
+
+##############
+#  COMPOSER  #
+##############
 
 echo "==> Composer" &>> $log_file
 echo "    Updating client" &>> $log_file
@@ -48,6 +69,10 @@ composer self-update &>> $log_file
 echo "    Updating global packages" &>> $log_file
 composer global update --no-progress &>> $log_file
 echo &>> $log_file
+
+###############
+#  RUBY GEMS  #
+###############
 
 echo "==> Ruby Gems" &>> $log_file
 echo "    Updating sources" &>> $log_file
