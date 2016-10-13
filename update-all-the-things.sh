@@ -77,10 +77,10 @@ echo 1>> $log_file
 
 echo "==> Composer"
 echo "    Updating client"
-composer self-update 1>> $log_file
+composer self-update --quiet 1>> $log_file
 
 echo "    Updating global packages"
-composer global update --no-progress 1>> $log_file
+composer global update --no-progress --quiet 1>> $log_file
 
 echo 1>> $log_file
 
