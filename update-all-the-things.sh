@@ -53,7 +53,7 @@ echo 1>> $log_file
 
 echo "==> Atom Package Manager"
 echo "    Updating packages"
-apm update --no-confirm --no-color 1>> $log_file
+apm upgrade --no-confirm --no-color 1>> $log_file
 
 echo "    Cleaning up"
 apm clean --no-color 1>> $log_file
