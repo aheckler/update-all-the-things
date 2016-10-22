@@ -8,12 +8,12 @@
 #  CREATE LOG  #
 ################
 
-current_date=$(date +"%Y%m%d-%H%M%S")
+CURRENT_DATE=$(date +"%Y%m%d-%H%M%S")
 
-log_file=${HOME}/update-log-$current_date.txt
+LOG_FILE=${HOME}/update-log-${CURRENT_DATE}.txt
 
-echo "Starting updates..." 1>> $log_file
-echo 1>> $log_file
+echo "Starting updates..." 1>> ${LOG_FILE}
+echo 1>> ${LOG_FILE}
 
 ##############
 #  HOMEBREW  #
@@ -21,20 +21,20 @@ echo 1>> $log_file
 
 echo "==> Homebrew"
 echo "    Updating client"
-brew update 1>> $log_file
+brew update 1>> ${LOG_FILE}
 
 echo "    Updating packages"
-brew upgrade 1>> $log_file
+brew upgrade 1>> ${LOG_FILE}
 
 echo "    Cleaning up"
-brew prune 1>> $log_file
-brew cleanup --force 1>> $log_file
+brew prune 1>> ${LOG_FILE}
+brew cleanup --force 1>> ${LOG_FILE}
 
 # "brew prune" deletes this directory, which breaks MySQL / MariaDB
 # https://github.com/Homebrew/legacy-homebrew/issues/31760
-mkdir /usr/local/etc/my.cnf.d 1>> $log_file
+mkdir /usr/local/etc/my.cnf.d 1>> ${LOG_FILE}
 
-echo 1>> $log_file
+echo 1>> ${LOG_FILE}
 
 ###################
 #  HOMEBREW CASK  #
@@ -42,9 +42,9 @@ echo 1>> $log_file
 
 echo "==> Homebrew Cask"
 echo "    Cleaning up"
-brew cask cleanup 1>> $log_file
+brew cask cleanup 1>> ${LOG_FILE}
 
-echo 1>> $log_file
+echo 1>> ${LOG_FILE}
 
 ##########
 #  ATOM  #
@@ -52,9 +52,9 @@ echo 1>> $log_file
 
 echo "==> Atom Package Manager"
 echo "    Updating packages"
-apm upgrade --no-confirm --no-color 1>> $log_file
+apm upgrade --no-confirm --no-color 1>> ${LOG_FILE}
 
-echo 1>> $log_file
+echo 1>> ${LOG_FILE}
 
 #########
 #  NPM  #
@@ -62,9 +62,9 @@ echo 1>> $log_file
 
 echo "==> Node Package Manager"
 echo "    Updating global packages"
-npm update -g 1>> $log_file
+npm update -g 1>> ${LOG_FILE}
 
-echo 1>> $log_file
+echo 1>> ${LOG_FILE}
 
 ##############
 #  COMPOSER  #
@@ -72,12 +72,12 @@ echo 1>> $log_file
 
 echo "==> Composer"
 echo "    Updating client"
-composer self-update --quiet 1>> $log_file
+composer self-update --quiet 1>> ${LOG_FILE}
 
 echo "    Updating global packages"
-composer global update --no-progress --quiet 1>> $log_file
+composer global update --no-progress --quiet 1>> ${LOG_FILE}
 
-echo 1>> $log_file
+echo 1>> ${LOG_FILE}
 
 ###############
 #  RUBY GEMS  #
@@ -85,25 +85,25 @@ echo 1>> $log_file
 
 echo "==> Ruby Gems"
 echo "    Updating sources"
-gem sources --update 1>> $log_file
+gem sources --update 1>> ${LOG_FILE}
 
 echo "    Updating system"
-gem update --system 1>> $log_file
+gem update --system 1>> ${LOG_FILE}
 
 echo "    Updating gems"
-gem update 1>> $log_file
+gem update 1>> ${LOG_FILE}
 
 echo "    Cleaning up"
-gem cleanup --quiet 1>> $log_file
+gem cleanup --quiet 1>> ${LOG_FILE}
 
-echo 1>> $log_file
+echo 1>> ${LOG_FILE}
 
 ##############
 #  OPEN LOG  #
 ##############
 
-echo "ALL DONE!" 1>> $log_file
+echo "ALL DONE!" 1>> ${LOG_FILE}
 
-open -t $log_file
+open -t ${LOG_FILE}
 
 exit 0;
