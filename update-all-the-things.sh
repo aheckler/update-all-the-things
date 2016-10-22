@@ -8,7 +8,6 @@
 #  CREATE LOG  #
 ################
 
-current_user=$(whoami)
 current_date=$(date +"%Y%m%d-%H%M%S")
 
 log_file=${HOME}/update-log-$current_date.txt
