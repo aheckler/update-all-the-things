@@ -62,7 +62,7 @@ echo 1>> ${LOG_FILE}
 
 echo "==> Node Package Manager"
 echo "    Updating global packages"
-npm update -g 1>> ${LOG_FILE}
+npm update --global --progress false 1>> ${LOG_FILE}
 
 echo 1>> ${LOG_FILE}
 
