@@ -104,6 +104,13 @@ echo 1>> ${LOG_FILE}
 # echo 1>> ${LOG_FILE}
 
 ##############
+#  BREWFILE  #
+##############
+
+echo "==> Updating .Brewfile"
+brew bundle dump --global --force 1>> ${LOG_FILE}
+
+##############
 #  OPEN LOG  #
 ##############
 
