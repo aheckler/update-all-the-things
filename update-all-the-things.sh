@@ -32,7 +32,10 @@ brew cleanup --force 1>> ${LOG_FILE}
 
 # "brew prune" deletes this directory, which breaks MySQL / MariaDB
 # https://github.com/Homebrew/legacy-homebrew/issues/31760
-mkdir /usr/local/etc/my.cnf.d 1>> ${LOG_FILE}
+#
+# Commenting this out since I don't have MySQL or MariaDB on my new laptop
+#
+# mkdir /usr/local/etc/my.cnf.d 1>> ${LOG_FILE}
 
 echo 1>> ${LOG_FILE}
 
@@ -83,20 +86,22 @@ echo 1>> ${LOG_FILE}
 #  RUBY GEMS  #
 ###############
 
-echo "==> Ruby Gems"
-echo "    Updating sources"
-gem sources --update 1>> ${LOG_FILE}
+# Commenting this out since I don't use Gems on my new laptop
 
-echo "    Updating system"
-gem update --system 1>> ${LOG_FILE}
-
-echo "    Updating gems"
-gem update 1>> ${LOG_FILE}
-
-echo "    Cleaning up"
-gem cleanup --quiet 1>> ${LOG_FILE}
-
-echo 1>> ${LOG_FILE}
+# echo "==> Ruby Gems"
+# echo "    Updating sources"
+# gem sources --update 1>> ${LOG_FILE}
+#
+# echo "    Updating system"
+# gem update --system 1>> ${LOG_FILE}
+#
+# echo "    Updating gems"
+# gem update 1>> ${LOG_FILE}
+#
+# echo "    Cleaning up"
+# gem cleanup --quiet 1>> ${LOG_FILE}
+#
+# echo 1>> ${LOG_FILE}
 
 ##############
 #  OPEN LOG  #
