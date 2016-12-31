@@ -103,6 +103,16 @@ echo 1>> ${LOG_FILE}
 #
 # echo 1>> ${LOG_FILE}
 
+#########
+#  PIP  #
+#########
+
+# Need to do some trickery here since pip doesn't
+# have a way to upgrade all packages at once.
+echo "==> PIP"
+echo "    Updating packages"
+pip3 install --quiet --upgrade $(pip3 list --outdated --format=json | jq -r .[].name | tr '\n' ' ') 1>> ${LOG_FILE}
+
 ##############
 #  BREWFILE  #
 ##############
