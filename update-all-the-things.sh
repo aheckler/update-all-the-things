@@ -82,27 +82,6 @@ composer global update --no-progress --quiet 1>> ${LOG_FILE}
 
 echo 1>> ${LOG_FILE}
 
-###############
-#  RUBY GEMS  #
-###############
-
-# Commenting this out since I don't use Gems on my new laptop
-
-# echo "==> Ruby Gems"
-# echo "    Updating sources"
-# gem sources --update 1>> ${LOG_FILE}
-#
-# echo "    Updating system"
-# gem update --system 1>> ${LOG_FILE}
-#
-# echo "    Updating gems"
-# gem update 1>> ${LOG_FILE}
-#
-# echo "    Cleaning up"
-# gem cleanup --quiet 1>> ${LOG_FILE}
-#
-# echo 1>> ${LOG_FILE}
-
 #########
 #  PIP  #
 #########
