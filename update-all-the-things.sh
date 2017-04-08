@@ -69,6 +69,19 @@ npm update --global --progress false 1>> ${LOG_FILE}
 
 echo 1>> ${LOG_FILE}
 
+##########
+#  YARN  #
+##########
+
+echo "==> Yarn"
+echo "    Clearing package cache"
+yarn cache clean 1>> ${LOG_FILE}
+
+echo "    Updating global packages"
+yarn global upgrade 1>> ${LOG_FILE}
+
+echo 1>> ${LOG_FILE}
+
 ##############
 #  COMPOSER  #
 ##############
