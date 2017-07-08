@@ -64,6 +64,9 @@ echo 1>> ${LOG_FILE}
 #########
 
 echo "==> Node Package Manager"
+echo "    Updating NPM"
+npm install --global --progress false npm@latest 1>> ${LOG_FILE}
+
 echo "    Updating global packages"
 npm update --global --progress false 1>> ${LOG_FILE}
 
