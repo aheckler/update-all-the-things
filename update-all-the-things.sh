@@ -80,14 +80,16 @@ echo 1>> ${LOG_FILE}
 #  YARN  #
 ##########
 
-echo "==> Yarn"
-echo "    Clearing package cache"
-yarn cache clean 1>> ${LOG_FILE}
+# Commenting this out because I never use Yarn.
 
-echo "    Updating global packages"
-yarn global upgrade 1>> ${LOG_FILE}
-
-echo 1>> ${LOG_FILE}
+# echo "==> Yarn"
+# echo "    Clearing package cache"
+# yarn cache clean 1>> ${LOG_FILE}
+# 
+# echo "    Updating global packages"
+# yarn global upgrade 1>> ${LOG_FILE}
+# 
+# echo 1>> ${LOG_FILE}
 
 ##############
 #  COMPOSER  #
@@ -108,6 +110,7 @@ echo 1>> ${LOG_FILE}
 
 # Need to do some trickery here since pip doesn't
 # have a way to upgrade all packages at once.
+
 echo "==> PIP"
 echo "    Updating packages"
 pip3 install --quiet --upgrade $(pip3 list --outdated --format=json | jq -r .[].name | tr '\n' ' ') 1>> ${LOG_FILE}
