@@ -63,14 +63,18 @@ echo 1>> ${LOG_FILE}
 #  NPM  #
 #########
 
-echo "==> Node Package Manager"
-echo "    Updating NPM"
-npm install --global --progress false npm@latest 1>> ${LOG_FILE}
+# Commenting out these lines because I've installed
+# Node and NPM via n (https://github.com/tj/n) now,
+# and I didn't have any global packages anyway. :)
 
-echo "    Updating global packages"
-npm update --global --progress false 1>> ${LOG_FILE}
-
-echo 1>> ${LOG_FILE}
+# echo "==> Node Package Manager"
+# echo "    Updating NPM"
+# npm install --global --progress false npm@latest 1>> ${LOG_FILE}
+# 
+# echo "    Updating global packages"
+# npm update --global --progress false 1>> ${LOG_FILE}
+# 
+# echo 1>> ${LOG_FILE}
 
 ##########
 #  YARN  #
