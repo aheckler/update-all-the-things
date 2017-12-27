@@ -30,13 +30,6 @@ echo "    Cleaning up"
 brew prune 1>> ${LOG_FILE}
 brew cleanup --force 1>> ${LOG_FILE}
 
-# "brew prune" deletes this directory, which breaks MySQL / MariaDB
-# https://github.com/Homebrew/legacy-homebrew/issues/31760
-#
-# Commenting this out since I don't have MySQL or MariaDB on my new laptop
-#
-# mkdir /usr/local/etc/my.cnf.d 1>> ${LOG_FILE}
-
 echo 1>> ${LOG_FILE}
 
 ###################
