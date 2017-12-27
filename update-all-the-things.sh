@@ -115,6 +115,23 @@ echo "==> PIP"
 echo "    Updating packages"
 pip3 install --quiet --upgrade $(pip3 list --outdated --format=json | jq -r .[].name | tr '\n' ' ') 1>> ${LOG_FILE}
 
+############
+#  WP-CLI  #
+############
+
+echo "==> WP-CLI"
+
+# WP-CLI is installed by Homebrew,
+# so no need to update here.
+
+# echo "    Updating WP-CLI"
+# wp cli update --yes 1>> ${LOG_FILE}
+
+echo "    Updating packages"
+wp package update 1>> ${LOG_FILE}
+
+echo 1>> ${LOG_FILE}
+
 ##############
 #  BREWFILE  #
 ##############
