@@ -102,6 +102,9 @@ echo 1>> ${LOG_FILE}
 #########
 
 echo "==> PIP"
+echo "    Updating client"
+pip install --quiet --upgrade pip 1>> ${LOG_FILE}
+
 echo "    Updating packages"
 
 # Need to do some trickery here since pip doesn't
@@ -110,7 +113,7 @@ echo "    Updating packages"
 
 PIP_OUTDATED_PKGS=$(pip3 list --outdated --format=json | jq -r .[].name)
 if [[ -z "PIP_OUTDATED_PKGS" ]]; then
-	pip3 install --quiet --upgrade $(pip3 list --outdated --format=json | jq -r .[].name | tr '\n' ' ') 1>> ${LOG_FILE}
+	pip install --quiet --upgrade $(pip3 list --outdated --format=json | jq -r .[].name | tr '\n' ' ') 1>> ${LOG_FILE}
 fi
 
 ############
