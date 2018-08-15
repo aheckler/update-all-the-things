@@ -32,16 +32,6 @@ brew cleanup --force 1>> ${LOG_FILE}
 
 echo 1>> ${LOG_FILE}
 
-###################
-#  HOMEBREW CASK  #
-###################
-
-echo "==> Homebrew Cask"
-echo "    Cleaning up"
-brew cask cleanup 1>> ${LOG_FILE}
-
-echo 1>> ${LOG_FILE}
-
 ##########
 #  ATOM  #
 ##########
