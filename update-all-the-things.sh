@@ -28,7 +28,7 @@ brew upgrade 1>> ${LOG_FILE}
 
 echo "    Cleaning up"
 brew prune 1>> ${LOG_FILE}
-brew cleanup --force 1>> ${LOG_FILE}
+brew cleanup 1>> ${LOG_FILE}
 
 echo 1>> ${LOG_FILE}
 
