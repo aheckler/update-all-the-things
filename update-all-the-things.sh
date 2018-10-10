@@ -10,7 +10,7 @@
 
 CURRENT_DATE=$(date +"%Y%m%d-%H%M%S")
 
-LOG_FILE=${HOME}/update-log-${CURRENT_DATE}.txt
+LOG_FILE=${HOME}/Desktop/update-log-${CURRENT_DATE}.txt
 
 echo "Starting updates..." 1>> ${LOG_FILE}
 echo 1>> ${LOG_FILE}
