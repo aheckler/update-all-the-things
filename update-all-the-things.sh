@@ -19,28 +19,36 @@ echo 1>> ${LOG_FILE}
 #  HOMEBREW  #
 ##############
 
-echo "==> Homebrew"
-echo "    Updating client"
-brew update 1>> ${LOG_FILE}
+if [[ $(command -v brew) ]]; then
+	echo "==> Homebrew"
+	echo "    Updating client"
+	brew update 1>> ${LOG_FILE}
 
-echo "    Updating packages"
-brew upgrade 1>> ${LOG_FILE}
+	echo "    Updating packages"
+	brew upgrade 1>> ${LOG_FILE}
 
-echo "    Cleaning up"
-brew prune 1>> ${LOG_FILE}
-brew cleanup 1>> ${LOG_FILE}
+	echo "    Cleaning up"
+	brew prune 1>> ${LOG_FILE}
+	brew cleanup 1>> ${LOG_FILE}
 
-echo 1>> ${LOG_FILE}
+	echo 1>> ${LOG_FILE}
+else
+	echo "==> Skipping Homebrew, not installed"
+fi
 
 ##########
 #  ATOM  #
 ##########
 
-echo "==> Atom Package Manager"
-echo "    Updating packages"
-apm upgrade --no-confirm --no-color 1>> ${LOG_FILE}
+if [[ $(command -v apm) ]]; then
+	echo "==> Atom Package Manager"
+	echo "    Updating packages"
+	apm upgrade --no-confirm --no-color 1>> ${LOG_FILE}
 
-echo 1>> ${LOG_FILE}
+	echo 1>> ${LOG_FILE}
+else
+	echo "==> Skipping Atom, not installed"
+fi
 
 #########
 #  NPM  #
@@ -63,65 +71,79 @@ echo 1>> ${LOG_FILE}
 #  YARN  #
 ##########
 
-# Commenting this out because I never use Yarn.
+if [[ $(command -v yarn) ]]; then
+	echo "==> Yarn"
+	echo "    Clearing package cache"
+	yarn cache clean 1>> ${LOG_FILE}
 
-# echo "==> Yarn"
-# echo "    Clearing package cache"
-# yarn cache clean 1>> ${LOG_FILE}
-#
-# echo "    Updating global packages"
-# yarn global upgrade 1>> ${LOG_FILE}
-#
-# echo 1>> ${LOG_FILE}
+	echo "    Updating global packages"
+	yarn global upgrade 1>> ${LOG_FILE}
+
+	echo 1>> ${LOG_FILE}
+else
+	echo "==> Skipping Yarn, not installed"
+fi
 
 ##############
 #  COMPOSER  #
 ##############
 
-echo "==> Composer"
-echo "    Updating client"
-composer self-update --quiet 1>> ${LOG_FILE}
+if [[ $(command -v composer) ]]; then
+	echo "==> Composer"
+	echo "    Updating client"
+	composer self-update --quiet 1>> ${LOG_FILE}
 
-echo "    Updating global packages"
-composer global update --no-progress --quiet 1>> ${LOG_FILE}
+	echo "    Updating global packages"
+	composer global update --no-progress --quiet 1>> ${LOG_FILE}
 
-echo 1>> ${LOG_FILE}
+	echo 1>> ${LOG_FILE}
+else
+	echo "==> Skipping Composer, not installed"
+fi
 
 #########
 #  PIP  #
 #########
 
-echo "==> PIP"
-echo "    Updating client"
-pip install --quiet --upgrade pip 1>> ${LOG_FILE}
+if [[ $(command -v pip) ]]; then
+	echo "==> PIP"
+	echo "    Updating client"
+	pip install --quiet --upgrade pip 1>> ${LOG_FILE}
 
-echo "    Updating packages"
+	echo "    Updating packages"
 
-# Need to do some trickery here since pip doesn't
-# have a way to upgrade all packages at once, and
-# it returns an error if there's nothing to update.
+	# Need to do some trickery here since pip doesn't
+	# have a way to upgrade all packages at once, and
+	# it returns an error if there's nothing to update.
 
-PIP_OUTDATED_PKGS=$(pip3 list --outdated --format=json | jq -r .[].name)
-if [[ -z "PIP_OUTDATED_PKGS" ]]; then
-	pip install --quiet --upgrade $(pip3 list --outdated --format=json | jq -r .[].name | tr '\n' ' ') 1>> ${LOG_FILE}
+	PIP_OUTDATED_PKGS=$(pip3 list --outdated --format=json | jq -r .[].name)
+	if [[ -z "PIP_OUTDATED_PKGS" ]]; then
+		pip install --quiet --upgrade $(pip3 list --outdated --format=json | jq -r .[].name | tr '\n' ' ') 1>> ${LOG_FILE}
+	fi
+else
+	echo "==> Skipping PIP, not installed"
 fi
 
 ############
 #  WP-CLI  #
 ############
 
-echo "==> WP-CLI"
+if [[ $(command -v wp) ]]; then
+	echo "==> WP-CLI"
 
-# WP-CLI is installed by Homebrew,
-# so no need to update here.
+	# WP-CLI is installed by Homebrew,
+	# so no need to update here.
 
-# echo "    Updating WP-CLI"
-# wp cli update --yes 1>> ${LOG_FILE}
+	# echo "    Updating WP-CLI"
+	# wp cli update --yes 1>> ${LOG_FILE}
 
-echo "    Updating packages"
-wp package update 1>> ${LOG_FILE}
+	echo "    Updating packages"
+	wp package update 1>> ${LOG_FILE}
 
-echo 1>> ${LOG_FILE}
+	echo 1>> ${LOG_FILE}
+else
+	echo "==> Skipping WP-CLI, not installed"
+fi
 
 ##############
 #  BREWFILE  #
