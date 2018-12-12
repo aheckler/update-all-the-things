@@ -108,7 +108,7 @@ fi
 if [[ $(command -v pip) ]]; then
 	echo "==> PIP"
 	echo "    Updating client"
-	pip install --quiet --upgrade pip 1>> ${LOG_FILE}
+	pip install --quiet --upgrade pip setuptools 1>> ${LOG_FILE}
 
 	echo "    Updating packages"
 
