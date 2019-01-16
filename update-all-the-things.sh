@@ -29,11 +29,11 @@ if [[ $(command -v brew) ]]; then
 
 	echo "    Cleaning up"
 	brew cleanup 1>> ${LOG_FILE}
-	
+
 	# `brew cleanup` deletes this directory, which breaks
 	# MariaDB. We need to recreate it by hand afterward.
 	# https://github.com/Homebrew/legacy-homebrew/issues/31760
-	mkdir -p /usr/local/etc/my.cnf.d &>> $log_file
+	mkdir -p /usr/local/etc/my.cnf.d 1>> ${LOG_FILE}
 
 	echo 1>> ${LOG_FILE}
 else
