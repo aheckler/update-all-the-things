@@ -128,27 +128,6 @@ else
 	echo "==> Skipping PIP, not installed"
 fi
 
-############
-#  WP-CLI  #
-############
-
-if [[ $(command -v wp) ]]; then
-	echo "==> WP-CLI"
-
-	# WP-CLI is installed by Homebrew,
-	# so no need to update here.
-
-	# echo "    Updating WP-CLI"
-	# wp cli update --yes 1>> ${LOG_FILE}
-
-	echo "    Updating packages"
-	wp package update 1>> ${LOG_FILE}
-
-	echo 1>> ${LOG_FILE}
-else
-	echo "==> Skipping WP-CLI, not installed"
-fi
-
 ##############
 #  BREWFILE  #
 ##############
