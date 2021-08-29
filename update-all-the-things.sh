@@ -112,17 +112,17 @@ fi
 if [[ $(command -v pip) ]]; then
 	echo "==> PIP"
 	echo "    Updating client"
-	python -m pip install --quiet --upgrade pip setuptools 1>> ${LOG_FILE}
-
+	python -m pip install --quiet --upgrade pip 1>> ${LOG_FILE}
+	
 	echo "    Updating packages"
 
 	# Need to do some trickery here since pip doesn't
 	# have a way to upgrade all packages at once, and
 	# it returns an error if there's nothing to update.
 
-	PIP_OUTDATED_PKGS=$(python -m pip list --outdated --format=json | jq -r .[].name)
+	PIP_OUTDATED_PKGS=$(python -m pip list --outdated --format=json | jq -r '.[].name' | tr '\n' ' ')
 	if [[ -z "PIP_OUTDATED_PKGS" ]]; then
-		python -m pip install --quiet --upgrade $(python -m pip list --outdated --format=json | jq -r .[].name | tr '\n' ' ') 1>> ${LOG_FILE}
+		python -m pip install --quiet --upgrade $(python -m pip list --outdated --format=json | jq -r '.[].name' | tr '\n' ' ') 1>> ${LOG_FILE}
 	fi
 else
 	echo "==> Skipping PIP, not installed"
