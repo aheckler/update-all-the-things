@@ -1,145 +1,102 @@
-#!/bin/bash
+#!/bin/zsh
 #
-# Update local package managers.
+# Update software installed via CLI.
 #
 # https://github.com/aheckler/update-all-the-things
 
-################
-#  CREATE LOG  #
-################
+############
+#  PROMPT  #
+############
+
+echo
+echo "This script does the following:"
+echo
+echo " -> brew autoremove"
+echo " -> brew update"
+echo " -> brew upgrade"
+echo " -> brew bundle dump --global --force"
+echo " -> npm update --global"
+echo
+
+if read -q "?Do you want to continue [y/N]? "; then
+else
+	echo
+	echo
+	echo "Operation aborted. Exiting..."
+	echo
+	exit;
+fi
+
+##############
+#  LOG FILE  #
+##############
 
 CURRENT_DATE=$(date +"%Y%m%d-%H%M%S")
 
 LOG_FILE=${HOME}/Desktop/update-log-${CURRENT_DATE}.txt
 
-echo "Starting updates..." 1>> ${LOG_FILE}
-echo 1>> ${LOG_FILE}
+echo "Starting updates..." >> ${LOG_FILE}
+echo >> ${LOG_FILE}
 
 ##############
 #  HOMEBREW  #
 ##############
 
-if [[ $(command -v brew) ]]; then
-	echo "==> Homebrew"
-	echo "    Updating client"
-	brew update 1>> ${LOG_FILE}
+echo
+echo
+echo "==> Homebrew"
 
-	echo "    Updating packages"
-	brew upgrade 1>> ${LOG_FILE}
+echo "    Removing unused dependencies"
+brew autoremove >> ${LOG_FILE}
 
-	echo "    Cleaning up"
-	brew cleanup 1>> ${LOG_FILE}
+echo "    Updating Homebrew and formula list"
+brew update >> ${LOG_FILE}
 
-	# `brew cleanup` deletes this directory, which breaks
-	# MariaDB. We need to recreate it by hand afterward.
-	# https://github.com/Homebrew/legacy-homebrew/issues/31760
-	mkdir -p /usr/local/etc/my.cnf.d 1>> ${LOG_FILE}
+echo "    Updating installed packages"
+brew upgrade >> ${LOG_FILE}
 
-	echo 1>> ${LOG_FILE}
-else
-	echo "==> Skipping Homebrew, not installed"
-fi
+echo "    Updating .Brewfile"
+brew bundle dump --global --force >> ${LOG_FILE}
+
+echo >> ${LOG_FILE}
 
 ##########
-#  ATOM  #
+#  NODE  #
 ##########
 
-if [[ $(command -v apm) ]]; then
-	echo "==> Atom Package Manager"
-	echo "    Updating packages"
-	apm upgrade --no-confirm --no-color 1>> ${LOG_FILE}
+echo
+echo "==> Node"
 
-	echo 1>> ${LOG_FILE}
+echo "    Checking latest Node LTS version"
+
+# Get the currently installed Node version.
+#
+# Cuts 2 characterss off the start of the string
+# since Node outputs the version as `vXX.XX.XX`.
+INSTALLED_NODE=$(node --version | cut -c 2-)
+
+# Get the latest LTS Node version via `n`.
+LATEST_LTS_NODE=$(n ls-remote lts)
+
+# Compare the two version strings.
+if [[ ${INSTALLED_NODE} == ${LATEST_LTS_NODE} ]]; then
+    echo "    Node is on the latest LTS version. :)"
 else
-	echo "==> Skipping Atom, not installed"
+	echo
+	echo "    #############################################"
+    echo "    #  NODE NEEDS UPDATED TO THE LATEST LTS!!!  #"
+	echo "    #############################################"
+	echo
 fi
 
-#########
-#  NPM  #
-#########
-
-if [[ $(command -v npm) ]]; then
-	echo "==> Node Package Manager"
-	echo "    Updating NPM"
-	npm install --global --progress false npm@latest 1>> ${LOG_FILE}
-
-	echo "    Updating global packages"
-	npm update --global --progress false 1>> ${LOG_FILE}
-
-	echo 1>> ${LOG_FILE}
-else
-	echo "==> Skipping NPM, not installed"
-fi
-
-##########
-#  YARN  #
-##########
-
-if [[ $(command -v yarn) ]]; then
-	echo "==> Yarn"
-	echo "    Clearing package cache"
-	yarn cache clean 1>> ${LOG_FILE}
-
-	echo "    Updating global packages"
-	yarn global upgrade 1>> ${LOG_FILE}
-
-	echo 1>> ${LOG_FILE}
-else
-	echo "==> Skipping Yarn, not installed"
-fi
-
-##############
-#  COMPOSER  #
-##############
-
-if [[ $(command -v composer) ]]; then
-	echo "==> Composer"
-	echo "    Updating client"
-	composer self-update --quiet 1>> ${LOG_FILE}
-
-	echo "    Updating global packages"
-	composer global update --no-progress --quiet 1>> ${LOG_FILE}
-
-	echo 1>> ${LOG_FILE}
-else
-	echo "==> Skipping Composer, not installed"
-fi
-
-#########
-#  PIP  #
-#########
-
-if [[ $(command -v pip) ]]; then
-	echo "==> PIP"
-	echo "    Updating client"
-	python -m pip install --quiet --upgrade pip 1>> ${LOG_FILE}
-	
-	echo "    Updating packages"
-
-	# Need to do some trickery here since pip doesn't
-	# have a way to upgrade all packages at once, and
-	# it returns an error if there's nothing to update.
-
-	PIP_OUTDATED_PKGS=$(python -m pip list --outdated --format=json | jq -r '.[].name' | tr '\n' ' ')
-	if [[ -z "PIP_OUTDATED_PKGS" ]]; then
-		python -m pip install --quiet --upgrade $(python -m pip list --outdated --format=json | jq -r '.[].name' | tr '\n' ' ') 1>> ${LOG_FILE}
-	fi
-else
-	echo "==> Skipping PIP, not installed"
-fi
-
-##############
-#  BREWFILE  #
-##############
-
-echo "==> Updating .Brewfile"
-brew bundle dump --global --force 1>> ${LOG_FILE}
+echo "    Updating global NPM packages"
+npm update --global --progress=false
 
 ##############
 #  OPEN LOG  #
 ##############
 
-echo "ALL DONE!" 1>> ${LOG_FILE}
+echo "ALL DONE!" >> ${LOG_FILE}
 
 open -t ${LOG_FILE}
 
