@@ -15,6 +15,7 @@ echo " -> brew autoremove"
 echo " -> brew update"
 echo " -> brew upgrade"
 echo " -> brew bundle dump --global --force"
+echo " -> tldr --update"
 echo " -> npm update --global"
 echo
 
@@ -59,6 +60,16 @@ echo "    Updating .Brewfile"
 brew bundle dump --global --force >> ${LOG_FILE}
 
 echo >> ${LOG_FILE}
+
+##########
+#  TLDR  #
+##########
+
+echo
+echo "==> tldr"
+
+echo "    Updating database"
+tldr --update >> ${LOG_FILE}
 
 ##########
 #  NODE  #
