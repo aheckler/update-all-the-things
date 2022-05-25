@@ -100,6 +100,9 @@ else
 	echo
 fi
 
+echo "    Updating NPM to latest version"
+npm install --global --progress=false npm@latest
+
 echo "    Updating global NPM packages"
 npm update --global --progress=false
 
