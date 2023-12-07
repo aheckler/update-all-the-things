@@ -16,7 +16,7 @@ echo " -> brew update"
 echo " -> brew upgrade"
 echo " -> brew bundle dump --global --force"
 echo " -> tldr --update"
-echo " -> npm update --global"
+# echo " -> npm update --global"
 echo
 
 if read -q "?Do you want to continue [y/N]? "; then
