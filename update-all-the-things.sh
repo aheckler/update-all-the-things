@@ -75,36 +75,36 @@ tldr --update >> ${LOG_FILE}
 #  NODE  #
 ##########
 
-echo
-echo "==> Node"
+# echo
+# echo "==> Node"
 
-echo "    Checking latest Node LTS version"
+# echo "    Checking latest Node LTS version"
 
 # Get the currently installed Node version.
 #
 # Cuts 2 characterss off the start of the string
 # since Node outputs the version as `vXX.XX.XX`.
-INSTALLED_NODE=$(node --version | cut -c 2-)
+# INSTALLED_NODE=$(node --version | cut -c 2-)
 
 # Get the latest LTS Node version via `n`.
-LATEST_LTS_NODE=$(n ls-remote lts)
+# LATEST_LTS_NODE=$(n ls-remote lts)
 
 # Compare the two version strings.
-if [[ ${INSTALLED_NODE} == ${LATEST_LTS_NODE} ]]; then
-    echo "    Node is on the latest LTS version. :)"
-else
-	echo
-	echo "    #############################################"
-    echo "    #  NODE NEEDS UPDATED TO THE LATEST LTS!!!  #"
-	echo "    #############################################"
-	echo
-fi
+# if [[ ${INSTALLED_NODE} == ${LATEST_LTS_NODE} ]]; then
+#     echo "    Node is on the latest LTS version. :)"
+# else
+# 	echo
+# 	echo "    #############################################"
+#     echo "    #  NODE NEEDS UPDATED TO THE LATEST LTS!!!  #"
+# 	echo "    #############################################"
+# 	echo
+# fi
 
-echo "    Updating NPM to latest version"
-npm install --global --progress=false npm@latest
-
-echo "    Updating global NPM packages"
-npm update --global --progress=false
+# echo "    Updating NPM to latest version"
+# npm install --global --progress=false npm@latest
+#
+# echo "    Updating global NPM packages"
+# npm update --global --progress=false
 
 ##############
 #  OPEN LOG  #
