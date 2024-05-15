@@ -11,7 +11,7 @@
 echo
 echo "This script does the following:"
 echo
-echo " -> brew autoremove"
+echo " -> brew cleanup --prune=all"
 echo " -> brew update"
 echo " -> brew upgrade"
 echo " -> brew bundle dump --global --force"
@@ -47,8 +47,8 @@ echo
 echo
 echo "==> Homebrew"
 
-echo "    Removing unused dependencies"
-brew autoremove >> ${LOG_FILE}
+echo "    Cleaning up Homebrew"
+brew cleanup --prune=all >> ${LOG_FILE}
 
 echo "    Updating Homebrew and formula list"
 brew update >> ${LOG_FILE}
